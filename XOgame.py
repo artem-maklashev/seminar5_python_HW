@@ -103,9 +103,11 @@ while True:
     isEmpty = False
     while not isEmpty:
         x = input(f'Ходи кожаный -> X // Введи номер ячейки ')
-        if x.isdigit():
-            x = int(x)
-            isEmpty = True
+        if x.isdigit(): 
+            if int(x) > 0 and int(x) < 10:
+                x = int(x)
+                isEmpty = True
+        DrawNet(cell)
     ChangeCell(x, cell, 'X')   
 
     if CheckWin(winlist, cell) == False:
