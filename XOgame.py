@@ -6,9 +6,7 @@ def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
 def DefoultNet():
-    cell = []
-    for i in range(1,10):
-        cell.append(i)
+    cell = [i for i in range(1,10)]
     return cell
 
 def DrawNet(net_list):
@@ -29,25 +27,17 @@ def ChangeCell(index, net, symbol):
     # DrawNet(net)
 
 def CheckWin(winlist, net):
-    x_list = []
-    o_list =[]
-    for i in range(0,len(net)):
-        if net[i]=='O':
-            o_list.append(i+1)
-        elif net[i]=='X':
-            x_list.append(i+1)
+    x_list = PlayerCells(net, 'X')
+    o_list =PlayerCells(net, 'O')
     DrawNet(net)
     for i in range(len(winlist)):
         if len(set(x_list).intersection(set(winlist[i]))) == 3:
-            # DrawNet(net)
             print('\033[32mТы выиграл :( \033[0m')
             return False
         elif len(set(o_list).intersection(set(winlist[i]))) == 3:
-            # DrawNet(net)
-            print('\033[36mМеня не победить \033[0m')
+            print('\033[36mSkyNet не победить \033[0m')
             return False
         elif len(x_list)+len(o_list) == 9:
-            # DrawNet(net)
             print ('Похоже ничья')
             return False
 
@@ -59,14 +49,8 @@ def PlayerCells(net, symbol):
     player_cells = []
     for i in range(len(net)):
         if net[i] == symbol:
-            player_cells.append(i+1)
+            player_cells.append(i+1)  
     return player_cells
-
-def ChekCell(number : int, net : list):
-    if number in EmptyCells(net):
-        return True
-    else:
-        return False    
 
 def Intellect2(net, winlist: set):
     player_list = PlayerCells(net, 'X')
